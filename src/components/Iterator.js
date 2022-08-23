@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Iterator() {
+function Iterator(props) {
   return (
     <div className='iterator'>
-      <button>Previous</button>
-      <button>Next</button>
+      <button onClick={props.prev}>Previous</button>
+      <button onClick={props.next}>Next</button>
     </div>
   );
 }

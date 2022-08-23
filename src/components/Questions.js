@@ -25,12 +25,56 @@ function Questions() {
           text: 'Hello this is an answer',
           corret: true,
         },
+        {
+          id: 7,
+          text: 'Hello this is an answer',
+          corret: true,
+        },
+      ],
+    },
+    {
+      question: 'Second question',
+      answers: [
+        {
+          id: 6,
+          text: 'First answer',
+          corret: true,
+        },
+      ],
+    },
+    {
+      question: 'Thirs question',
+      answers: [
+        {
+          id: 9,
+          text: 'First Answer',
+          corret: true,
+        },
+      ],
+    },
+    {
+      question: 'Forth question',
+      answers: [
+        {
+          id: 3,
+          text: 'Don’t dare to interrupt them',
+          corret: false,
+        },
+        {
+          id: 4,
+          text: 'Think it’s more important to give them some of your time; work can wait',
+          corret: true,
+        },
       ],
     },
   ];
 
   const next = () => {
-    setIndex((index) => index + 1);
+    if (index == questions.length - 1) {
+      return;
+    } else {
+      setIndex((index) => index + 1);
+    }
   };
 
   const prev = () => {
