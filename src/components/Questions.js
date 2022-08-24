@@ -5,8 +5,11 @@ import Iterator from './Iterator';
 
 function Questions() {
   const [index, setIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
+
   const questions = [
     {
+      id: 1,
       question:
         'You’re really busy at work and a colleague is telling you their life story and personal woes. You:',
       answers: [
@@ -23,26 +26,28 @@ function Questions() {
         {
           id: 5,
           text: 'Hello this is an answer',
-          corret: true,
+          corret: false,
         },
         {
           id: 7,
           text: 'Hello this is an answer',
-          corret: true,
+          corret: false,
         },
       ],
     },
     {
+      id: 2,
       question: 'Second question',
       answers: [
         {
           id: 6,
           text: 'First answer',
-          corret: true,
+          corret: false,
         },
       ],
     },
     {
+      id: 3,
       question: 'Thirs question',
       answers: [
         {
@@ -53,6 +58,7 @@ function Questions() {
       ],
     },
     {
+      id: 4,
       question: 'Forth question',
       answers: [
         {
@@ -70,7 +76,7 @@ function Questions() {
   ];
 
   const next = () => {
-    if (index == questions.length - 1) {
+    if (index === questions.length - 1) {
       return;
     } else {
       setIndex((index) => index + 1);
@@ -78,22 +84,53 @@ function Questions() {
   };
 
   const prev = () => {
-    setIndex((index) => index - 1);
+    if (index === 0) {
+      return;
+    } else {
+      setIndex((index) => index - 1);
+    }
+  };
+
+  const handleAnswer = (e, id) => {
+    setAnswers((answers) => ({...answers, [id]: e.target.value}));
+  };
+
+  const getResult = () => {
+    Object.values(answers).forEach((val) => console.log(val));
   };
 
   return (
     <div className="card">
       {questions.map((question, idx) => {
         return (
-          <div className={index == idx ? 'active' : 'inactive'}>
-            <Question text={question.question} />;
+          <div
+            key={question.id}
+            className={index === idx ? 'active' : 'inactive'}
+          >
+            <Question text={question.question} />
             {question.answers.map((answer) => (
-              <Answer text={answer.text} />
+              <Answer
+                key={answer.id}
+                answer={answer}
+                question={question}
+                getAnswer={handleAnswer}
+              />
             ))}
           </div>
         );
       })}
-      <Iterator next={next} prev={prev} />
+      <Iterator
+        next={next}
+        prev={prev}
+        index={index}
+        length={questions.length - 1}
+      />
+      <button
+        className={index === questions.length - 1 ? 'active' : 'inactive'}
+        onClick={getResult}
+      >
+        Check
+      </button>
     </div>
   );
 }
