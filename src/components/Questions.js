@@ -92,11 +92,28 @@ function Questions() {
   };
 
   const handleAnswer = (e, id) => {
-    setAnswers((answers) => ({...answers, [id]: e.target.value}));
+    setAnswers((answers) => ({ ...answers, [id]: e.target.value }));
+  };
+
+  const analyzeResults = (correctAnswers, wrongAnswers) => {
+    
   };
 
   const getResult = () => {
-    Object.values(answers).forEach((val) => console.log(val));
+    let countCorrectAnswers = 0;
+    let countWrongAnswers = 0;
+    Object.values(answers).forEach((val) => {
+      if (val === 'true') {
+        countCorrectAnswers++;
+      } else {
+        countWrongAnswers++;
+      }
+    });
+
+    console.log(
+      `Correct Answers: ${countCorrectAnswers}`,
+      `Wrong Answers: ${countWrongAnswers}`,
+    );
   };
 
   return (
