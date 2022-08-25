@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Answer from './Answer';
 import Question from './Question';
 import Iterator from './Iterator';
 
+
 function Questions() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState({});
+  const navigate = useNavigate();
 
   const questions = [
     {
@@ -96,7 +99,15 @@ function Questions() {
   };
 
   const analyzeResults = (correctAnswers, wrongAnswers) => {
-    
+    let result = 0
+    if(correctAnswers === wrongAnswers){
+      result = 0
+    } else if (correctAnswers > wrongAnswers) {
+      result = 1;
+    } else {
+      result = -1;
+    }
+    navigate(`/result_page/${result}`);
   };
 
   const getResult = () => {
@@ -114,6 +125,8 @@ function Questions() {
       `Correct Answers: ${countCorrectAnswers}`,
       `Wrong Answers: ${countWrongAnswers}`,
     );
+
+    analyzeResults(countCorrectAnswers, countWrongAnswers);
   };
 
   return (
