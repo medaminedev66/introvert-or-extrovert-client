@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Questions from './components/Questions';
+import HomePage from './pages/HomePage';
 import ResultPage from './pages/ResultPage';
 
 
@@ -9,7 +9,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Questions />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/result_page/:result" element={<ResultPage />} />
         </Routes>
       </BrowserRouter>

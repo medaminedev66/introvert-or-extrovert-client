@@ -6,7 +6,7 @@ const Answer = (props) => {
       <input
         type="radio"
         name={props.question.id}
-        value={props.answer.corret}
+        value={props.answer.correct}
         onChange={(e) => {
           props.getAnswer(e, props.question.id);
         }}
