@@ -77,8 +77,15 @@ function Questions(props) {
     });
   };
 
+  const handleClick = () => {
+    navigate('add_question');
+  };
+
   return (
     <div className="card">
+      <button type="button" className="add-btn" onClick={handleClick}>
+        Add question
+      </button>
       {props.questions.map((question, idx) => {
         return (
           <div

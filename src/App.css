@@ -1,8 +1,26 @@
 
+.flx-clm {
+  display: flex;
+  flex-direction: column;
+}
+
+.home {
+  padding-top: 3rem;
+  align-items: center;
+}
+
+.home h1 {
+  margin-bottom: 3rem;
+}
+
+.add-btn {
+ align-self: flex-end;
+}
+
 .card {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 60%;
   min-height: 3rem;
   margin: auto;
   border: 2px solid black;
