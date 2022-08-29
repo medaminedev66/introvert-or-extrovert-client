@@ -9,7 +9,7 @@ function AddQuestion() {
   console.log(question);
 
   const handleSubmit = async () => {
-    const response =  await fetch('http://localhost:3000/api/v1/questions', {
+    const response = await fetch('http://localhost:3000/api/v1/questions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ function AddQuestion() {
           text: question,
         },
       }),
-    })
+    });
     if (!response.ok) {
       throw new Error(`API error! status: ${response.status}`);
     }

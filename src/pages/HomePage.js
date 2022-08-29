@@ -21,7 +21,7 @@ const HomePage = () => {
       <button type="button" onClick={handleClick}>
         Add question
       </button>
-      <Questions questions={questions} />
+      <Questions questions={questions} handleState={setQuestions} />
     </>
   );
 };

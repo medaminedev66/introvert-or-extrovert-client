@@ -4,7 +4,6 @@ import Answer from './Answer';
 import Question from './Question';
 import Iterator from './Iterator';
 
-
 function Questions(props) {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -29,12 +28,12 @@ function Questions(props) {
   const handleAnswer = (e, id) => {
     setAnswers((answers) => ({ ...answers, [id]: e.target.value }));
   };
-  
-  console.log(answers)
+
+  console.log(answers);
   const analyzeResult = (correctAnswers, wrongAnswers) => {
-    let result = 0
-    if(correctAnswers === wrongAnswers){
-      result = 0
+    let result = 0;
+    if (correctAnswers === wrongAnswers) {
+      result = 0;
     } else if (correctAnswers > wrongAnswers) {
       result = -1;
     } else {
@@ -62,6 +61,22 @@ function Questions(props) {
     analyzeResult(countCorrectAnswers, countWrongAnswers);
   };
 
+  const removeQuestion = (id) => {
+    fetch(`http://localhost:3000/api/v1/questions/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => {
+      if (res) {
+        props.handleState(() =>
+          props.questions.filter((question) => question.id !== id),
+        );
+        prev();
+      }
+    });
+  };
+
   return (
     <div className="card">
       {props.questions.map((question, idx) => {
@@ -70,6 +85,9 @@ function Questions(props) {
             key={question.id}
             className={index === idx ? 'active' : 'inactive'}
           >
+            <button type="button" onClick={() => removeQuestion(question.id)}>
+              Remove the question
+            </button>
             <Question text={question.question} />
             {question.answers.map((answer) => (
               <Answer
