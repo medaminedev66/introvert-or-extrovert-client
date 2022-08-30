@@ -8,5 +8,6 @@
 
 body {
   font-family: 'Manrope', sans-serif;
-  background-color: rgb(197, 214, 244);
+  background-image: url(/public/bg-pattern.svg);
+  background-repeat: no-repeat;
 }

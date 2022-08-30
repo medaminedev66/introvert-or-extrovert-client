@@ -10,10 +10,14 @@ function Questions(props) {
   const navigate = useNavigate();
 
   const next = () => {
-    if (index === props.questions.length - 1) {
-      return;
+    if (!props.question) {
+      if (index === props.questions.length - 1) {
+        return;
+      } else {
+        setIndex((index) => index + 1);
+      }
     } else {
-      setIndex((index) => index + 1);
+      return;
     }
   };
 
@@ -92,33 +96,35 @@ function Questions(props) {
             key={question.id}
             className={index === idx ? 'active' : 'inactive'}
           >
-            <button type="button" onClick={() => removeQuestion(question.id)}>
+            <button
+              type="button"
+              className="remove-btn"
+              onClick={() => removeQuestion(question.id)}
+            >
               Remove the question
             </button>
+            <a className='add-answer-btn'>Add a potential answer for this question</a>
             <Question text={question.question} />
-            {question.answers.map((answer) => (
-              <Answer
-                key={answer.id}
-                answer={answer}
-                question={question}
-                getAnswer={handleAnswer}
-              />
-            ))}
+            <div className="flx-clm answers">
+              {question.answers.map((answer) => (
+                <Answer
+                  key={answer.id}
+                  answer={answer}
+                  question={question}
+                  getAnswer={handleAnswer}
+                />
+              ))}
+            </div>
           </div>
         );
       })}
       <Iterator
         next={next}
         prev={prev}
+        check={getResult}
         index={index}
         length={props.questions.length - 1}
       />
-      <button
-        className={index === props.questions.length - 1 ? 'active' : 'inactive'}
-        onClick={getResult}
-      >
-        Check
-      </button>
     </div>
   );
 }

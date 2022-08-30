@@ -1,7 +1,20 @@
+:root {
+  --Soft-Cyan: hsl(174, 77%, 80%);
+  --Strong-Cyan: hsl(174, 86%, 45%);
+  --light-grayish-red: hsl(14, 92%, 95%);
+  --Light-Red: hsl(15, 100%, 70%);
+  --Pale-Blue: hsl(226, 100%, 87%);
+  --strong-blue: hsl(227, 35%, 25%);
+}
 
 .flx-clm {
   display: flex;
   flex-direction: column;
+}
+
+.flx-row {
+  display: flex;
+  flex-direction: row;
 }
 
 .home {
@@ -14,17 +27,35 @@
 }
 
 .add-btn {
- align-self: flex-end;
+  align-self: flex-end;
+  background-color: var(--Strong-Cyan);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: hsl(174, 100%, 45%);
+}
+
+.add-btn:focus {
+  background-color: hsl(174, 97%, 30%);
 }
 
 .card {
+  padding: 1rem;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   width: 60%;
   min-height: 3rem;
   margin: auto;
-  border: 2px solid black;
-  background-color:burlywood;
+  background-color: white;
+  box-shadow: 0 0 5px rgb(224, 224, 224);
 }
 
 .active {
@@ -33,4 +64,74 @@
 
 .inactive {
   display: none;
+}
+
+.question {
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.answers {
+  gap: 0.5rem;
+}
+
+.iterator {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.btn-iterator {
+  padding: 0.5rem;
+  width: 100%;
+  background-color: var(--strong-blue);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-iterator:hover {
+  background-color: hsl(227, 34%, 42%);
+}
+
+.btn-iterator:focus {
+  background-color: hsl(227, 33%, 22%);
+}
+
+.btn-itr-prev {
+  background-color: var(--Pale-Blue);
+}
+
+.remove-btn {
+  padding: 0.5rem;
+  background-color: var(--Light-Red);
+  border: none;
+  color: var(--strong-blue);
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+
+}
+
+.answer {
+  gap: 0.5rem;
+}
+
+.fa-pen {
+  color: var(--Soft-Cyan);
+  cursor: pointer;
+}
+
+.fa-trash {
+  color: var(--Light-Red);
+  cursor: pointer;
+}
+
+.add-answer-btn {
+  cursor: pointer;
+  font-size: small;
+  margin-left: 1rem;
+  text-decoration: underline;
 }
