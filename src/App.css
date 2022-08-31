@@ -15,6 +15,7 @@
 .flx-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .home {
@@ -141,9 +142,44 @@
 }
 
 .question-update {
-  display: flex; 
+  display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
   gap: 0.5rem;
+}
+
+.answer-modal-container {
+  background-color: rgba(0, 0, 0, 0.555);
+  position: fixed;
+  display: flex;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer-modal {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 5px;
+  width: 60%;
+  gap: 1rem;
+}
+
+.answer-modal input {
+  width: 80%;
+}
+
+.answer-modal button {
+  width: 20%;
+  padding: 0.5rem;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  border: 0.5px solid black;
+  border-radius: 5px;
 }

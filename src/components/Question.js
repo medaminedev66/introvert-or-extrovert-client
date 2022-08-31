@@ -17,7 +17,7 @@ const Question = (props) => {
   return (
     <div className="flx-row question">
       <h2 className={!update ? 'active' : 'inactive'}>
-        {props.text}
+        {props.text}{' '}
         <FontAwesomeIcon
           className="fa-pen"
           onClick={() => setUpdate(true)}

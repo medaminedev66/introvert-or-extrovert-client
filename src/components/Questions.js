@@ -112,6 +112,8 @@ function Questions(props) {
     navigate('add_question');
   };
 
+  // const addAnswer = () => {};
+
   return (
     <div className="card">
       <button type="button" className="add-btn" onClick={handleClick}>
@@ -123,16 +125,18 @@ function Questions(props) {
             key={question.id}
             className={index === idx ? 'active' : 'inactive'}
           >
-            <button
-              type="button"
-              className="remove-btn"
-              onClick={() => removeQuestion(question.id)}
-            >
-              Remove the question
-            </button>
-            <a className="add-answer-btn">
-              Add a potential answer for this question
-            </a>
+            <div className='flx-row'>
+              <button
+                type="button"
+                className="remove-btn"
+                onClick={() => removeQuestion(question.id)}
+              >
+                Remove the question
+              </button>
+              <p className="add-answer-btn" onClick={() => props.openModal(question.id)}>
+                Add a potential answer for this question
+              </p>
+            </div>
             <Question
               updateQuestion={updateQuestion}
               text={question.question}
