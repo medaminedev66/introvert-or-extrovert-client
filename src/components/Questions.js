@@ -81,6 +81,33 @@ function Questions(props) {
     });
   };
 
+  const updateQuestion = (id, updatedQuestion) => {
+    fetch(`http://localhost:3000/api/v1/questions/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: {
+          text: updatedQuestion,
+        },
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        props.handleState(
+          props.questions.map((question) => {
+            if (question.id === id) {
+              question.question = updatedQuestion;
+            }
+            return question;
+          }),
+        );
+      } else {
+        throw new Error(`API error! status: ${res.status}`);
+      }
+    });
+  };
+
   const handleClick = () => {
     navigate('add_question');
   };
@@ -103,8 +130,14 @@ function Questions(props) {
             >
               Remove the question
             </button>
-            <a className='add-answer-btn'>Add a potential answer for this question</a>
-            <Question text={question.question} />
+            <a className="add-answer-btn">
+              Add a potential answer for this question
+            </a>
+            <Question
+              updateQuestion={updateQuestion}
+              text={question.question}
+              id={question.id}
+            />
             <div className="flx-clm answers">
               {question.answers.map((answer) => (
                 <Answer

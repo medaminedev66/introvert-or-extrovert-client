@@ -14,7 +14,6 @@ const Answer = (props) => {
         }}
       />
       <label>{props.answer.text}</label>
-      <i class="fa-solid "></i>
       <FontAwesomeIcon className="fa-pen" icon={faPenToSquare} size="xs" />
       <FontAwesomeIcon className="fa-trash" icon={faTrashCan} size="xs" />
     </div>

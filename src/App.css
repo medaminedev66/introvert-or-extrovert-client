@@ -112,7 +112,7 @@
 }
 
 .remove-btn:hover {
-
+  background-color: hsl(15, 100%, 81%);
 }
 
 .answer {
@@ -134,4 +134,16 @@
   font-size: small;
   margin-left: 1rem;
   text-decoration: underline;
+}
+
+.question-input {
+  width: 100%;
+}
+
+.question-update {
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
 }
