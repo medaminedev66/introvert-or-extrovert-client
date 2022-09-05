@@ -4,10 +4,13 @@ import {
   faPenToSquare,
   faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
+import { updateQuestion } from '../redux/questions/questions';
+import { useDispatch } from 'react-redux';
 
 const Question = (props) => {
   const [update, setUpdate] = useState(false);
   const [updatedQuestion, setUpdatedQuestion] = useState(props.text);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setUpdatedQuestion(() => e.target.value);
@@ -37,7 +40,7 @@ const Question = (props) => {
           className="fa-pen"
           onClick={() => {
             setUpdate(false);
-            props.updateQuestion(props.id, updatedQuestion);
+            dispatch(updateQuestion(props.id, updatedQuestion));
           }}
           icon={faCircleCheck}
           size="xs"

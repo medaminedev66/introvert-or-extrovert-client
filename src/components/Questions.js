@@ -3,15 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import Answer from './Answer';
 import Question from './Question';
 import Iterator from './Iterator';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeQuestion } from '../redux/questions/questions';
 
 function Questions(props) {
+  const questions = useSelector((state) => state.questionsReducer);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const next = () => {
-    if (!props.question) {
-      if (index === props.questions.length - 1) {
+    if (questions) {
+      if (index === questions.length - 1) {
         return;
       } else {
         setIndex((index) => index + 1);
@@ -65,49 +69,6 @@ function Questions(props) {
     analyzeResult(countCorrectAnswers, countWrongAnswers);
   };
 
-  const removeQuestion = (id) => {
-    fetch(`http://localhost:3000/api/v1/questions/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => {
-      if (res) {
-        props.handleState(() =>
-          props.questions.filter((question) => question.id !== id),
-        );
-        prev();
-      }
-    });
-  };
-
-  const updateQuestion = (id, updatedQuestion) => {
-    fetch(`http://localhost:3000/api/v1/questions/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        question: {
-          text: updatedQuestion,
-        },
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        props.handleState(
-          props.questions.map((question) => {
-            if (question.id === id) {
-              question.question = updatedQuestion;
-            }
-            return question;
-          }),
-        );
-      } else {
-        throw new Error(`API error! status: ${res.status}`);
-      }
-    });
-  };
-
   const handleClick = () => {
     navigate('add_question');
   };
@@ -119,26 +80,28 @@ function Questions(props) {
       <button type="button" className="add-btn" onClick={handleClick}>
         Add question
       </button>
-      {props.questions.map((question, idx) => {
+      {questions.map((question, idx) => {
         return (
           <div
             key={question.id}
             className={index === idx ? 'active' : 'inactive'}
           >
-            <div className='flx-row'>
+            <div className="flx-row">
               <button
                 type="button"
                 className="remove-btn"
-                onClick={() => removeQuestion(question.id)}
+                onClick={() => dispatch(removeQuestion(question.id))}
               >
                 Remove the question
               </button>
-              <p className="add-answer-btn" onClick={() => props.openModal(question.id)}>
+              <p
+                className="add-answer-btn"
+                onClick={() => props.openModal(question.id)}
+              >
                 Add a potential answer for this question
               </p>
             </div>
             <Question
-              updateQuestion={updateQuestion}
               text={question.question}
               id={question.id}
             />
@@ -160,7 +123,7 @@ function Questions(props) {
         prev={prev}
         check={getResult}
         index={index}
-        length={props.questions.length - 1}
+        length={questions.length - 1}
       />
     </div>
   );
