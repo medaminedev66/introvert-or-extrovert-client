@@ -4,6 +4,9 @@ const FETCH_DATA = 'questions/FETCH_DATA';
 const REMOVE_QUESTION = 'questions/REMOVE_QUESTION';
 const ADD_QUESTION = 'questions/ADD_QUESTION';
 const UPDATE_QUESTION = 'questions/UPDATE_QUESTION';
+export const ADD_ANSWER = 'questions/ADD_ANSWER';
+export const REMOVE_ANSWER = 'questions/REMOVE_ANSWER';
+
 const initialState = [];
 
 export const fetchQuestions = () => async (dispatch) => {
@@ -94,6 +97,30 @@ export const questionsReducer = (state = initialState, action) => {
         }
         return question;
       });
+    case ADD_ANSWER:
+      return state.map((question) => {
+        if (question.id === action.payload.question_id) {
+          question.answers = [
+            ...question.answers,
+            {
+              text: action.payload.answer,
+              question_id: action.payload.question_id,
+              correct: false,
+            },
+          ];
+        }
+        return question;
+      });
+    case REMOVE_ANSWER:
+      return state.map((question) => {
+        if (question.id === action.payload.question_id) {
+          question.answers = question.answers.filter(
+            (answer) => answer.id != action.payload.answer_id,
+          );
+        }
+        return question;
+      });
+
     default:
       return state;
   }

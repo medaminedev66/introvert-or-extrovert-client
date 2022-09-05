@@ -1,45 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addAnswer } from '../redux/answers/answers';
 
 const AddAnswer = (props) => {
   const [answer, setAnswer] = useState('');
+  const dispatch = useDispatch();
   const getAnswer = (e) => {
     setAnswer(e.target.value);
   };
 
-  console.log(props.question_id);
-  const handleSubmit = async () => {
-    const res = await fetch('http://localhost:3000/api/v1/answers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answer: {
-          text: answer,
-          question_id: props.question_id,
-        },
-      }),
-    });
-    if (res.ok) {
-      props.setOpened(false);
-      props.handleState(
-        props.questions.map((question) => {
-          if (question.id === props.question_id) {
-            question.answers = [
-              ...question.answers,
-              {
-                text: answer,
-                question_id: props.question_id,
-                correct: false,
-              },
-            ];
-          }
-          return question;
-        }),
-      );
-    } else {
-      throw new Error(`API error! status: ${res.status}`);
-    }
+  const handleSubmit = () => {
+    dispatch(addAnswer(answer, props.question_id));
+    props.setOpened(false);
   };
 
   return (
