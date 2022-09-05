@@ -73,8 +73,6 @@ function Questions(props) {
     navigate('add_question');
   };
 
-  // const addAnswer = () => {};
-
   return (
     <div className="card">
       <button type="button" className="add-btn" onClick={handleClick}>

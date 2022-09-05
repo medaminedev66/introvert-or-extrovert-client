@@ -1,32 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addQuestion } from '../redux/questions/questions';
+import './addQuestion.css';
 
 function AddQuestion() {
   const [question, setQuestion] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const getQuestion = (e) => {
     setQuestion(e.target.value);
   };
 
-  console.log(question);
-
-  const handleSubmit = async () => {
-    const response = await fetch('http://localhost:3000/api/v1/questions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        question: {
-          text: question,
-        },
-      }),
-    });
-    if (!response.ok) {
-      throw new Error(`API error! status: ${response.status}`);
-    }
+  const handleSubmit = () => {
+    dispatch(addQuestion(question));
+    navigate('/');
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className="flx-clm add-question-form" onSubmit={handleSubmit}>
+      <div className="flx-row">
         <label>The question:</label>
         <input type="text" onChange={getQuestion} />
       </div>

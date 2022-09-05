@@ -10,10 +10,8 @@ const HomePage = () => {
   const [opened, setOpened] = useState(false);
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
+  
   useEffect(() => {
-    // fetch('http://localhost:3000/api/v1/questions')
-    //   .then((respond) => respond.json())
-    //   .then((data) => setQuestions(() => data));
     dispatch(fetchQuestions())
   }, [dispatch]);
 
@@ -21,8 +19,6 @@ const HomePage = () => {
     <div className="flx-clm home">
       <h1>Introvert/Extrovert test</h1>
       <Questions
-        questions={questions}
-        handleState={setQuestions}
         openModal={(id) => {
           setOpened(true);
           setCurrentId(() => id);

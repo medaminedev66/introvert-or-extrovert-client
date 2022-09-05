@@ -15,7 +15,29 @@ export const fetchQuestions = () => async (dispatch) => {
   });
 };
 
-export const removeQuestion = (id) => async (dispatch) => {
+export const addQuestion = (question) => async (dispatch) => {
+  const response = await fetch(`${END_POINT}${API_ROUTE}questions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      question: {
+        text: question,
+      },
+    }),
+  });
+  if (response.ok) {
+    dispatch({
+      type: ADD_QUESTION,
+      payload: question,
+    });
+  } else {
+    throw new Error(`API error! status: ${response.status}`);
+  }
+};
+
+export const removeQuestion = (id) => (dispatch) => {
   fetch(`${END_POINT}${API_ROUTE}questions/${id}`, {
     method: 'DELETE',
     headers: {
@@ -61,6 +83,8 @@ export const questionsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA:
       return action.payload;
+    case ADD_QUESTION:
+      return state;
     case REMOVE_QUESTION:
       return state.filter((question) => question.id != action.payload);
     case UPDATE_QUESTION:
