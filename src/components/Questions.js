@@ -5,6 +5,7 @@ import Question from './Question';
 import Iterator from './Iterator';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeQuestion } from '../redux/questions/questions';
+import Button from './Button';
 
 function Questions(props) {
   const questions = useSelector((state) => state.questionsReducer);
@@ -75,9 +76,13 @@ function Questions(props) {
 
   return (
     <div className="card">
-      <button type="button" className="add-btn" onClick={handleClick}>
-        Add question
-      </button>
+      <Button
+        type="button"
+        handleClick={handleClick}
+        color="Strong-Cyan"
+        text="Add question"
+        status="add-btn"
+      />
       {questions.map((question, idx) => {
         return (
           <div
@@ -85,13 +90,12 @@ function Questions(props) {
             className={index === idx ? 'active' : 'inactive'}
           >
             <div className="flx-row">
-              <button
+              <Button
                 type="button"
-                className="remove-btn"
-                onClick={() => dispatch(removeQuestion(question.id))}
-              >
-                Remove the question
-              </button>
+                color="Light-Red"
+                text="Remove the question"
+                handleClick={() => dispatch(removeQuestion(question.id))}
+              />
               <p
                 className="add-answer-btn"
                 onClick={() => props.openModal(question.id)}
@@ -99,10 +103,7 @@ function Questions(props) {
                 Add a potential answer for this question
               </p>
             </div>
-            <Question
-              text={question.question}
-              id={question.id}
-            />
+            <Question text={question.question} id={question.id} />
             <div className="flx-clm answers">
               {question.answers.map((answer) => (
                 <Answer

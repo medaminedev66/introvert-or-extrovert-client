@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addAnswer } from '../redux/answers/answers';
+import Button from './Button';
 
 const AddAnswer = (props) => {
   const [answer, setAnswer] = useState('');
@@ -20,7 +21,7 @@ const AddAnswer = (props) => {
     >
       <div className="flx-row answer-modal">
         <input type="text" onChange={(e) => getAnswer(e)} />
-        <button onClick={handleSubmit}>Add the answer</button>
+        <Button type="button" text="Add the answer" handleClick={handleSubmit} color="strong-blue"/>
       </div>
     </div>
   );

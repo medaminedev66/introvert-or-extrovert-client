@@ -5,6 +5,7 @@
   --Light-Red: hsl(15, 100%, 70%);
   --Pale-Blue: hsl(226, 100%, 87%);
   --strong-blue: hsl(227, 35%, 25%);
+  --paragraph-size: 15px;
 }
 
 .flx-clm {
@@ -25,18 +26,17 @@
 
 .home h1 {
   margin-bottom: 3rem;
+  font-size: 4rem;
 }
 
 .add-btn {
   align-self: flex-end;
-  background-color: var(--Strong-Cyan);
-  border: none;
-  padding: 0.5rem 1rem;
+
   border-radius: 20px;
-  color: white;
-  font-size: 16px;
+
+
   margin-bottom: 1rem;
-  cursor: pointer;
+ 
 }
 
 .add-btn:hover {
@@ -74,6 +74,7 @@
 
 .answers {
   gap: 0.5rem;
+  font-size: var(--paragraph-size);
 }
 
 .iterator {
@@ -84,12 +85,7 @@
 }
 
 .btn-iterator {
-  padding: 0.5rem;
   width: 100%;
-  background-color: var(--strong-blue);
-  border: none;
-  color: white;
-  cursor: pointer;
 }
 
 .btn-iterator:hover {
@@ -159,6 +155,7 @@
   bottom: 0;
   justify-content: center;
   align-items: center;
+  font-size: var(--paragraph-size);
 }
 
 .answer-modal {

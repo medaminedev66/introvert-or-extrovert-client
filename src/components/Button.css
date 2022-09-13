@@ -1,0 +1,8 @@
+.default-btn {
+  padding: 0.5rem 1rem;
+  /* background-color: var(--strong-blue); */
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: var(--paragraph-size);
+}

@@ -4,15 +4,14 @@ import AddAnswer from '../components/AddAnswer';
 import Questions from '../components/Questions';
 import { fetchQuestions } from '../redux/questions/questions';
 
-
 const HomePage = () => {
   const [questions, setQuestions] = useState([]);
   const [opened, setOpened] = useState(false);
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-    dispatch(fetchQuestions())
+    dispatch(fetchQuestions());
   }, [dispatch]);
 
   return (

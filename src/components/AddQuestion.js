@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addQuestion } from '../redux/questions/questions';
 import './addQuestion.css';
+import Button from './Button';
 
 function AddQuestion() {
   const [question, setQuestion] = useState('');
@@ -24,7 +25,7 @@ function AddQuestion() {
         <label>The question:</label>
         <input type="text" onChange={getQuestion} />
       </div>
-      <button type="submit">Add question</button>
+      <Button type="submit" text="Add question" color="strong-blue"/>
     </form>
   );
 }
