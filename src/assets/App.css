@@ -31,12 +31,8 @@
 
 .add-btn {
   align-self: flex-end;
-
   border-radius: 20px;
-
-
   margin-bottom: 1rem;
- 
 }
 
 .add-btn:hover {

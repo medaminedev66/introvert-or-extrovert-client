@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Answer from './Answer';
 import Question from './Question';
-import Iterator from './Iterator';
+import Iterator from '../../components/Iterator';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeQuestion } from '../redux/questions/questions';
-import Button from './Button';
+import { removeQuestion } from '../../redux/questions/questions';
+import Button from '../../components/Button';
+
 
 function Questions(props) {
   const questions = useSelector((state) => state.questionsReducer);

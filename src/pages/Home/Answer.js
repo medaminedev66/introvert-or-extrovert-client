@@ -2,29 +2,27 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { removeAnswer } from '../redux/answers/answers';
+import { removeAnswer } from '../../redux/answers/answers';
 
-const Answer = (props) => {
+const Answer = ({ answer, question, getAnswer }) => {
   const dispatch = useDispatch();
+  const onRemoveAnswer = () => dispatch(removeAnswer(answer.id, question.id));
+  const onChangeAnswer = (e) => getAnswer(e, question.id);
   return (
     <div className="flx-row answer">
       <input
         type="radio"
-        name={props.question.id}
-        value={props.answer.correct}
-        onChange={(e) => {
-          props.getAnswer(e, props.question.id);
-        }}
+        name={question.id}
+        value={answer.correct}
+        onChange={onChangeAnswer}
       />
-      <label>{props.answer.text}</label>
+      <label>{answer.text}</label>
       <FontAwesomeIcon className="fa-pen" icon={faPenToSquare} size="xs" />
       <FontAwesomeIcon
         className="fa-trash"
         icon={faTrashCan}
         size="xs"
-        onClick={() =>
-          dispatch(removeAnswer(props.answer.id, props.question.id))
-        }
+        onClick={onRemoveAnswer}
       />
     </div>
   );

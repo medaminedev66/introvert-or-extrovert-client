@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const ResultPage = () => {
+const Result = () => {
   let params = useParams();
   let result = ""
   if (params.result === "0") {
@@ -15,4 +15,4 @@ const ResultPage = () => {
   return ( <h1>You are: {result}</h1> );
 }
 
-export default ResultPage;
+export default Result;

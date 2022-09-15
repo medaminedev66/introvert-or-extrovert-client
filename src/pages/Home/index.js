@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import AddAnswer from '../components/AddAnswer';
-import Questions from '../components/Questions';
-import { fetchQuestions } from '../redux/questions/questions';
+import AddAnswer from './AnswerForm';
+import Questions from './Questions';
+import { fetchQuestions } from '../../redux/questions/questions';
 
 const HomePage = () => {
   const [questions, setQuestions] = useState([]);

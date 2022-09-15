@@ -1,9 +1,9 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import AddQuestion from './components/AddQuestion';
-import HomePage from './pages/HomePage';
-import ResultPage from './pages/ResultPage';
+import './assets/App.css';
+import AddQuestion from './pages/QuestionForm';
+import HomePage from './pages/Home';
+import ResultPage from './pages/Result';
 import store from './redux/configureStore';
 
 

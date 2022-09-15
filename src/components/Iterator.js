@@ -14,30 +14,12 @@ function Iterator(props) {
         handleClick={prev}
         status={`${prevStatus} btn-iterator`}
       />
-
-      {/* <button
-        className={
-          index === 0 ? 'inactive' : 'active btn-iterator btn-itr-prev'
-        }
-        onClick={props.prev}
-      >
-        Previous
-      </button> */}
-
       <Button
         text="Next Question"
         status={`${nextStatus} btn-iterator`}
         handleClick={next}
         color="strong-blue"
       />
-      {/* <button
-        className={
-          props.index === props.length ? 'inactive' : 'active btn-iterator '
-        }
-        onClick={props.next}
-      >
-        Next Question
-      </button> */}
       <Button
         type="button"
         status={`${checkStatus} btn-iterator`}

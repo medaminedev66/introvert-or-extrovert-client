@@ -4,7 +4,7 @@ import {
   faPenToSquare,
   faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
-import { updateQuestion } from '../redux/questions/questions';
+import { updateQuestion } from '../../redux/questions/questions';
 import { useDispatch } from 'react-redux';
 
 const Question = (props) => {
@@ -33,7 +33,7 @@ const Question = (props) => {
           className="question-input"
           type="text"
           value={updatedQuestion}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
         />
 
         <FontAwesomeIcon

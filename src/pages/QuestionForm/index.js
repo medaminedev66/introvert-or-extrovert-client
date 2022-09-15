@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addQuestion } from '../redux/questions/questions';
-import './addQuestion.css';
-import Button from './Button';
+import { addQuestion } from '../../redux/questions/questions';
+import '../../assets/QuestionForm.css';
+import Button from '../../components/Button';
 
-function AddQuestion() {
+const QuestionForm = () => {
   const [question, setQuestion] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const getQuestion = (e) => {
-    setQuestion(e.target.value);
+  const getQuestion = ({ target: value}) => {
+    setQuestion(value);
   };
 
   const handleSubmit = () => {
-    dispatch(addQuestion(question));
-    navigate('/');
+    try {
+      dispatch(addQuestion(question));
+      navigate('/');
+    } catch (error) {
+      // throw new Error("")
+      // show error in the UI
+    }
   };
 
   return (
@@ -30,4 +35,4 @@ function AddQuestion() {
   );
 }
 
-export default AddQuestion;
+export default QuestionForm;

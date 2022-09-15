@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addAnswer } from '../redux/answers/answers';
-import Button from './Button';
+import Button from '../../components/Button';
+import { addAnswer } from '../../redux/answers/answers';
+
 
 const AddAnswer = (props) => {
   const [answer, setAnswer] = useState('');

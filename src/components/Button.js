@@ -1,19 +1,17 @@
 import React from 'react';
-import './Button.css';
+import '../assets/Button.css';
 
-const Button = (props) => {
-  const { type, handleClick, color, text, status } = props;
+const Button = ({ type, handleClick, color, text, status }) => {
   const style = {
-    color: {
-      backgroundColor: `var(--${color})`,
-    },
+    backgroundColor: `var(--${color})`,
   };
+  
   return (
     <button
       type={type}
       onClick={handleClick}
       className={`${status} default-btn`}
-      style={style.color}
+      style={style}
     >
       {text}
     </button>
