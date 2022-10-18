@@ -15,13 +15,8 @@ const QuestionForm = () => {
   };
 
   const handleSubmit = () => {
-    try {
-      dispatch(addQuestion(question));
-      navigate('/');
-    } catch (error) {
-      // throw new Error("")
-      // show error in the UI
-    }
+    dispatch(addQuestion(question));
+    navigate('/');
   };
 
   return (
