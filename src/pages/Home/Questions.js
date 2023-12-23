@@ -7,17 +7,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeQuestion } from '../../redux/questions/questions';
 import Button from '../../components/Button';
 
-
 function Questions(props) {
-  const questions = useSelector((state) => state.questionsReducer);
+  const { data, loading, error } = useSelector(
+    (state) => state.questionsReducer,
+  );
+  // const questions = useSelector((state) => state.questionsReducer);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const next = () => {
-    if (questions) {
-      if (index === questions.length - 1) {
+    if (data) {
+      if (index === data.length - 1) {
         return;
       } else {
         setIndex((index) => index + 1);
@@ -75,6 +77,13 @@ function Questions(props) {
     navigate('add_question');
   };
 
+  if (loading) {
+    return <p>Loading</p>;
+  }
+  if (error) {
+    return <p>Loading</p>;
+  }
+
   return (
     <div className="card">
       <Button
@@ -84,7 +93,7 @@ function Questions(props) {
         text="Add question"
         status="add-btn"
       />
-      {questions.map((question, idx) => {
+      {data.map((question, idx) => {
         return (
           <div
             key={question.id}
@@ -123,7 +132,7 @@ function Questions(props) {
         prev={prev}
         check={getResult}
         index={index}
-        length={questions.length - 1}
+        length={data.length - 1}
       />
     </div>
   );

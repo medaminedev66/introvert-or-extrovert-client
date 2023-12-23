@@ -10,8 +10,8 @@ const QuestionForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const getQuestion = ({ target: value}) => {
-    setQuestion(value);
+  const getQuestion = (event) => {
+    setQuestion(event.target.value);
   };
 
   const handleSubmit = () => {

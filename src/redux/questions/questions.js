@@ -1,21 +1,42 @@
-const END_POINT = 'http://localhost:3000/';
+const END_POINT = 'https://extrovert-or-introvert.onrender.com/';
 const API_ROUTE = '/api/v1/';
-const FETCH_DATA = 'questions/FETCH_DATA';
 const REMOVE_QUESTION = 'questions/REMOVE_QUESTION';
 const ADD_QUESTION = 'questions/ADD_QUESTION';
 const UPDATE_QUESTION = 'questions/UPDATE_QUESTION';
 export const ADD_ANSWER = 'questions/ADD_ANSWER';
 export const REMOVE_ANSWER = 'questions/REMOVE_ANSWER';
 
-const initialState = [];
+const initialState = {
+  loading: false,
+  data: [],
+  error: false,
+};
+
+export const fetchQuestionsRequest = () => ({
+  type: 'FETCH_QUESTIONS_REQUEST',
+});
+
+export const fetchQuestionsSuccess = (questions) => ({
+  type: 'FETCH_QUESTIONS_SUCCESS',
+  payload: questions,
+});
+
+export const fetchQuestionsFailure = (error) => ({
+  type: 'FETCH_QUESTIONS_FAILURE',
+  payload: error,
+});
 
 export const fetchQuestions = () => async (dispatch) => {
-  const res = await fetch(`${END_POINT}${API_ROUTE}questions`);
-  const data = await res.json();
-  dispatch({
-    type: FETCH_DATA,
-    payload: data,
-  });
+  dispatch(fetchQuestionsRequest);
+  try {
+    const res = await fetch(`${END_POINT}${API_ROUTE}questions`);
+    if (res) {
+      const data = await res.json();
+      dispatch(fetchQuestionsSuccess(data));
+    }
+  } catch (error) {
+    dispatch(fetchQuestionsFailure(error.message));
+  }
 };
 
 export const addQuestion = (question) => async (dispatch) => {
@@ -84,43 +105,70 @@ export const updateQuestion = (id, updatedQuestion) => async (dispatch) => {
 
 export const questionsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_DATA:
-      return action.payload;
+    case 'FETCH_QUESTIONS_REQUEST':
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case 'FETCH_QUESTIONS_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+    case 'FETCH_QUESTIONS_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     case ADD_QUESTION:
       return state;
     case REMOVE_QUESTION:
-      return state.filter((question) => question.id != action.payload);
+      return {
+        ...state,
+        data: state.data.filter((question) => question.id !== action.payload),
+      };
     case UPDATE_QUESTION:
-      return state.map((question) => {
-        if (question.id === action.payload.id) {
-          question.question = action.payload.updatedQuestion;
-        }
-        return question;
-      });
+      return {
+        ...state,
+        data: state.data.map((question) => {
+          if (question.id === action.payload.id) {
+            question.question = action.payload.updatedQuestion;
+          }
+          return question;
+        }),
+      };
     case ADD_ANSWER:
-      return state.map((question) => {
-        if (question.id === action.payload.question_id) {
-          question.answers = [
-            ...question.answers,
-            {
-              text: action.payload.answer,
-              question_id: action.payload.question_id,
-              correct: false,
-            },
-          ];
-        }
-        return question;
-      });
+      return {
+        ...state,
+        data: state.data.map((question) => {
+          if (question.id === action.payload.question_id) {
+            question.answers = [
+              ...question.answers,
+              {
+                text: action.payload.answer,
+                question_id: action.payload.question_id,
+                correct: false,
+              },
+            ];
+          }
+          return question;
+        }),
+      };
     case REMOVE_ANSWER:
-      return state.map((question) => {
-        if (question.id === action.payload.question_id) {
-          question.answers = question.answers.filter(
-            (answer) => answer.id != action.payload.answer_id,
-          );
-        }
-        return question;
-      });
-
+      return {
+        state,
+        data: state.data.map((question) => {
+          if (question.id === action.payload.question_id) {
+            question.answers = question.answers.filter(
+              (answer) => answer.id !== action.payload.answer_id,
+            );
+          }
+          return question;
+        }),
+      };
     default:
       return state;
   }

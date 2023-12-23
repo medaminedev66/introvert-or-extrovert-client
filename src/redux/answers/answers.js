@@ -1,5 +1,5 @@
 import { ADD_ANSWER, REMOVE_ANSWER } from '../questions/questions';
-const END_POINT = 'http://localhost:3000/';
+const END_POINT = 'https://extrovert-or-introvert.onrender.com/';
 const API_ROUTE = '/api/v1/';
 const UPDATE_ANSWER = 'answers/UPDATE_ANSWER';
 const initialState = [];
