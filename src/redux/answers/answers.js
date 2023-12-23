@@ -1,7 +1,6 @@
 import { ADD_ANSWER, REMOVE_ANSWER } from '../questions/questions';
 const END_POINT = 'https://extrovert-or-introvert.onrender.com/';
 const API_ROUTE = '/api/v1/';
-const UPDATE_ANSWER = 'answers/UPDATE_ANSWER';
 const initialState = [];
 
 export const addAnswer = (answer, question_id) => async (dispatch) => {
