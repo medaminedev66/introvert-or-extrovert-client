@@ -7,9 +7,9 @@ export const ADD_ANSWER = 'questions/ADD_ANSWER';
 export const REMOVE_ANSWER = 'questions/REMOVE_ANSWER';
 
 const initialState = {
-  loading: false,
+  loading: true,
   data: [],
-  error: false,
+  error: null,
 };
 
 export const fetchQuestionsRequest = () => ({
@@ -30,7 +30,8 @@ export const fetchQuestions = () => async (dispatch) => {
   dispatch(fetchQuestionsRequest);
   try {
     const res = await fetch(`${END_POINT}${API_ROUTE}questions`);
-    if (res) {
+    if (res.ok) {
+      console.log(res);
       const data = await res.json();
       dispatch(fetchQuestionsSuccess(data));
     }

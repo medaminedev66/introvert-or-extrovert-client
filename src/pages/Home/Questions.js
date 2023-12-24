@@ -81,7 +81,7 @@ function Questions(props) {
     return <p>Loading</p>;
   }
   if (error) {
-    return <p>Loading</p>;
+    return <p>{error}</p>;
   }
 
   return (
