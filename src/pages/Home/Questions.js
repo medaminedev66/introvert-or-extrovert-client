@@ -78,7 +78,7 @@ function Questions(props) {
   };
 
   if (loading) {
-    return <p>Loading</p>;
+    return <p>Loading: The server is currently initializing. Kindly allow 1-2 minutes for data retrieval to commence. Your patience is appreciated.</p>;
   }
   if (error) {
     return <p>{error}</p>;
